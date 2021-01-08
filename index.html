@@ -14,8 +14,20 @@
   <defs>
     <filter id="liquid">
       <!--important code : [blur + contrast] , contrast on alpha channel to prevent change color-->
-      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -10"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 160 -10" result="blobby"/>
+
+
+    <feTurbulence id="noise" type="fractalNoise" result="f1" stitchTiles="noStitch" baseFrequency="1" numOctaves="1" seed="0" />
+    <feColorMatrix type="matrix" values="-18 0 0 0 8     -18 0 0 0 8     -18 0 0 0 8     0 0 0 0 1" in="f1" result="f2" />
+    <feColorMatrix type="luminanceToAlpha" in="f2" result="f3" />
+    <feComposite in="blobby" in2="f3" result="f4" operator="in" />
+    <feColorMatrix type="matrix" values="1 0 0 0 0.05      0 1 0 0 0.05     0 0 1 0 0.05      0 0 0 1 0" in="f4" result="f5" />
+
+      <feMerge>
+        <feMergeNode in="blobby" />
+        <feMergeNode in="f5" />
+    </feMerge>
     </filter>
   </defs>
 </svg>

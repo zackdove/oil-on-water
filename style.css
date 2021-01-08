@@ -1,11 +1,12 @@
 body{
-  background: rgb(20, 60, 255);
+  background: rgb(230, 0, 100);
   margin: 0;
   padding: 0;
 }
 
 #canvas{
   position: absolute;
+  background: rgb(230, 0, 100);
   filter: url("#liquid");
   width: 100vw;
   height: 100vh;

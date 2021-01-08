@@ -4,10 +4,10 @@ const canvas = document.getElementById("canvas"),
   context = canvas.getContext("2d"),
   colorPallete =
       // ["#00f", "#00a", "#00b", "#00c", "#00d", "#00e"];
-      ["rgb(250, 0, 110)", "rgb(200, 0, 50)"]
+      ["rgb(230, 0, 100)"]
 // ["#f00","#a00","#b00","#c00","#d00","#e00"];
 // ["white","#888","yellow","orange","darkorange","darkmagenta","darkgreen","khaki"];
-  bluePallete = ["rgb(0,0,255)", "rgb(0,0,220)"]
+  bluePallete = ["rgb(0,0,255)"]
 
 var width = canvas.width = window.innerWidth,
   height = canvas.height = window.innerHeight,
@@ -27,16 +27,16 @@ window.onresize = function() {
 
 class Circle {
   constructor() {
-    this.x = src.x * 2;
-    this.y = (src.y / 2) + src.y;
-    this.angle = Math.PI * 2 * Math.random();
+    this.x = src.x * 2  +100;
+    this.y = (src.y / 2) + src.y + ((Math.random()-0.5)*src.y);
+      this.angle = Math.PI + ((Math.random()-0.5)*0.2);
     var speed=1 + Math.random();
     this.vx = speed* Math.cos(this.angle);
     this.vy = speed* Math.sin(this.angle);
 
     // this.xr = 6 + 10 * Math.random();
     // this.yr = 2 + 10 * Math.random();
-    this.r = 35 + 25 * Math.random()
+    this.r = 85 + 85 * Math.random()
 
     this.color = colorPallete[Math.floor(Math.random() * colorPallete.length)];
   }
@@ -55,17 +55,17 @@ class Circle {
 
 class Blue {
   constructor() {
-    this.x = (src.x * 2);
-    this.y = src.y / 2;
+    this.x = (src.x * 2) + 100;
+    this.y = src.y / 2 + ((Math.random()-0.5)*src.y);
     // this.angle = Math.PI * 2 * Math.random();
-    this.angle = Math.PI;
-    var speed=1 + Math.random();
+    this.angle = Math.PI + (Math.random()-0.5)*0.2;
+    var speed=0.8 + Math.random()*1.2;
     this.vx = speed* Math.cos(this.angle);
     this.vy = speed* Math.sin(this.angle);
 
     // this.xr = 6 + 10 * Math.random();
     // this.yr = 2 + 10 * Math.random();
-    this.r = 35 + 25 * Math.random()
+    this.r = 60 + 85 * Math.random()
 
     this.color = bluePallete[Math.floor(Math.random() * colorPallete.length)];
   }
@@ -87,7 +87,7 @@ function removeCircles() {
     (b) =>
       !(
         b.x + b.r < 0 ||
-        b.x - b.r > width ||
+        b.x - b.r > width+200 ||
         b.y + b.r < 0 ||
         b.y - b.r > height ||
         b.r < 0
@@ -97,7 +97,7 @@ function removeCircles() {
      (b) =>
        !(
          b.x + b.r < 0 ||
-         b.x - b.r > width ||
+         b.x - b.r > width+200 ||
          b.y + b.r < 0 ||
          b.y - b.r > height ||
          b.r < 0
@@ -108,9 +108,10 @@ function removeCircles() {
 function renderCircles() {
   context.clearRect(0, 0, width, height);
 
-  if (Math.random() > .2)
-    circles.push(new Circle());
+  if (Math.random() > 0.97){
+    // circles.push(new Circle());
     blues.push(new Blue());
+  }
 
   for (var i = 0; i < circles.length; i++) {
     var b = circles[i];
@@ -134,7 +135,14 @@ function renderCircles() {
     context.fill();
     b.update();
   }
-
+  context.fillStyle= colorPallete[0];
+  context.fillRect(0, src.y*3/2, src.x*2, src.y*2);
+  context.fillStyle= bluePallete[0];
+  context.fillRect(0, 0, src.x*2, src.y/2);
+  if (Math.random() > 0.8){
+    let noise=document.getElementById("noise");
+    noise.setAttribute("seed",Math.floor(Math.random()*10));
+  }
   removeCircles();
   requestAnimationFrame(renderCircles);
 }
