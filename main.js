@@ -12,6 +12,7 @@ src = {
 blues = [];
 var bar_height = 0;
 
+// Handle resize
 window.onresize = function() {
 	width = canvas.width = window.innerWidth;
 	height = canvas.height = window.innerHeight;
@@ -91,6 +92,7 @@ function renderCircles() {
 	requestAnimationFrame(renderCircles);
 }
 
+// Initialise
 function init(){
 	const initNumber = 15;
 	var minX = 50;
@@ -100,8 +102,7 @@ function init(){
 		b.x = minX + (Math.random() * (maxX - minX));
 		blues.push(b); 
 	}
+	renderCircles();
 }
 
 document.onload = init();
-
-renderCircles();
