@@ -2,6 +2,9 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 const redPallete = ["rgb(230, 0, 100)"];
 const bluePallete = ["rgb(0,0,255)"];
+const noiseNames = ["noise1.png","noise2.png","noise3.png","noise4.png"];
+var noiseIndex = 0;
+
 
 var width = canvas.width = window.innerWidth,
 height = canvas.height = window.innerHeight,
@@ -84,8 +87,11 @@ function renderCircles() {
 	context.fillStyle= bluePallete[0];
 	context.fillRect(0, 0, src.x*2, (src.y/2)-50+t_bar_height/2);
 	if ((bar_height % 8) == 0){
-		let noise=document.getElementById("noise");
-		noise.setAttribute("seed",Math.floor(Math.random()*100));
+		let oldNoise = document.getElementById("noise"+(noiseIndex+1));
+		noiseIndex = (noiseIndex + 1) % noiseNames.length;
+		let newNoise = document.getElementById("noise"+(noiseIndex+1));
+		newNoise.style.setProperty("display", "block");
+		oldNoise.style.setProperty("display", "none");
 	}
 	bar_height++;
 	removeCircles();
