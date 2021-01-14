@@ -51,3 +51,30 @@ body{
 		max-width: 70vw;
 	}
 }
+
+
+.noise{
+	
+	z-index: 9999;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	background-size: cover;
+	top: 0;
+}
+
+#noise1{
+	background-image: url(./noise1.png);
+}
+#noise2{
+	background-image: url(./noise2.png);
+	display: none;
+}
+#noise3{
+	background-image: url(./noise3.png);
+	display: none;
+}
+#noise4{
+	background-image: url(./noise4.png);
+	display: none;
+}
