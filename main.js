@@ -29,7 +29,7 @@ class Blue {
 		this.x = (src.x * 2) + 350;
 		this.y = src.y / 2 + ((Math.random()-0.5)*src.y);
 		this.angle = Math.PI + (Math.random()-0.5)*0.2;
-		var speed=2.8 + Math.random()*6.5;
+		var speed=1.8 + Math.random()*4.2;
 		this.vx = speed* Math.cos(this.angle);
 		this.vy = speed* Math.sin(this.angle);
 		this.r = 80 + 85 * Math.random()
@@ -62,7 +62,7 @@ function renderCircles() {
 	// Clear screen
 	context.clearRect(0, 0, width, height);
 	// Randomly decide whether to push new
-	if (Math.random() > 0.94){
+	if (Math.random() > 0.96){
 		blues.push(new Blue());
 	}
 	// Draw the circles
